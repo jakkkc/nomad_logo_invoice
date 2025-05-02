@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Softhub - Invoice for The Nomads Palace Logo</title>
+    <style>
+      :root {
+        --primary-pink: #ea2790;
+        --primary-blue: #3953a2;
+        --primary-green: #29c167;
+        --primary-orange: #f5a635;
+        --primary-white: #ffffff;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+
+      .invoice-container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .invoice-header {
+        padding: 30px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-blue),
+          var(--primary-green)
+        );
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .invoice-header::before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .invoice-header::after {
+        content: "";
+        position: absolute;
+        bottom: -80px;
+        left: -80px;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .company-logo {
+        max-width: 150px;
+        max-height: 80px;
+        width: auto;
+        height: auto;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .invoice-details {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      .invoice-info {
+        flex: 1;
+      }
+
+      .invoice-info p {
+        margin: 5px 0;
+      }
+
+      .invoice-body {
+        padding: 30px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+
+      th {
+        background-color: #f5f5f5;
+        color: #555;
+        font-weight: 600;
+      }
+
+      .total-row {
+        font-weight: bold;
+        background-color: #f9f9f9;
+      }
+
+      .total-amount {
+        font-size: 20px;
+        color: var(--primary-blue);
+      }
+
+      .color-circles {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+      }
+
+      .color-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin: 0 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .contact-form {
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 8px;
+        margin-top: 30px;
+      }
+
+      .contact-form h2 {
+        margin-top: 0;
+        color: var(--primary-blue);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #555;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 16px;
+      }
+
+      textarea {
+        height: 120px;
+        resize: vertical;
+      }
+
+      button {
+        background-color: var(--primary-pink);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #d41e7e;
+      }
+
+      .status-message {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 4px;
+        display: none;
+      }
+
+      .success {
+        background-color: #d4edda;
+        color: #155724;
+        display: block;
+      }
+
+      .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        display: block;
+      }
+
+      .invoice-footer {
+        text-align: center;
+        padding: 20px;
+        color: #777;
+        font-size: 14px;
+        border-top: 1px solid #eee;
+      }
+
+      .decoration-circle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.1;
+      }
+
+      .circle-1 {
+        width: 100px;
+        height: 100px;
+        background-color: var(--primary-pink);
+        top: 50px;
+        right: 100px;
+      }
+
+      .circle-2 {
+        width: 150px;
+        height: 150px;
+        background-color: var(--primary-orange);
+        bottom: 30px;
+        right: 40px;
+      }
+
+      .circle-3 {
+        width: 80px;
+        height: 80px;
+        background-color: var(--primary-green);
+        bottom: 100px;
+        left: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container">
+      <!-- Decorative circles -->
+      <div class="decoration-circle circle-1"></div>
+      <div class="decoration-circle circle-2"></div>
+      <div class="decoration-circle circle-3"></div>
+
+      <div class="invoice-header">
+        <!-- Your company logo -->
+        <img src="img/lgo.png" alt="Softhub Logo" class="company-logo" />
+
+        <h1>Invoice</h1>
+        <div class="invoice-details">
+          <div class="invoice-info">
+            <p><strong>Softhub</strong></p>
+            <p>Kenya</p>
+            <p>Email:</p>
+          </div>
+          <div class="invoice-info">
+            jacmwaniki@gmail.com
+            <p><strong>Invoice #:</strong> SH-2023-001</p>
+            <p><strong>Date:</strong> <span id="current-date"></span></p>
+            <p><strong>Due Date:</strong> <span id="due-date"></span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="invoice-body">
+        <div class="invoice-info">
+          <p><strong>Bill To:</strong></p>
+          <p>The Nomads Palace</p>
+          <p>Logo Design Service</p>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Custom Logo Design for The Nomads Palace</td>
+              <td>Kes. 20,000</td>
+            </tr>
+            <tr>
+              <td>VAT (16%)</td>
+              <td>Kes. 3,200</td>
+            </tr>
+            <tr class="total-row">
+              <td>Total Amount Due</td>
+              <td class="total-amount">Kes. 23,200</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="color-circles">
+          <div class="color-circle" style="background-color: #ea2790"></div>
+          <div class="color-circle" style="background-color: #3953a2"></div>
+          <div class="color-circle" style="background-color: #29c167"></div>
+          <div class="color-circle" style="background-color: #f5a635"></div>
+          <div
+            class="color-circle"
+            style="background-color: #ffffff; border: 1px solid #ddd"
+          ></div>
+        </div>
+
+        <div class="contact-form">
+          <h2>Contact Us</h2>
+          <form id="invoiceContactForm">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+          </form>
+          <div id="statusMessage" class="status-message"></div>
+        </div>
+      </div>
+
+      <div class="invoice-footer">
+        <p>Thank you for your business! Payment due within 14 days.</p>
+        <p>
+          Softhub &copy; <span id="current-year"></span>. All rights reserved.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Set current date and due date (14 days from now)
+      document.addEventListener("DOMContentLoaded", function () {
+        const now = new Date();
+        const dueDate = new Date();
+        dueDate.setDate(now.getDate() + 14);
+
+        document.getElementById("current-date").textContent = formatDate(now);
+        document.getElementById("due-date").textContent = formatDate(dueDate);
+        document.getElementById("current-year").textContent = now.getFullYear();
+
+        // Form submission
+        const contactForm = document.getElementById("invoiceContactForm");
+        const statusMessage = document.getElementById("statusMessage");
+
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(contactForm);
+          const formObject = {};
+          formData.forEach((value, key) => {
+            formObject[key] = value;
+          });
+
+          // Here you would typically send the data to a server
+          // For this example, we'll simulate a successful submission
+          statusMessage.textContent =
+            "Thank you for your message! We'll get back to you soon.";
+          statusMessage.className = "status-message success";
+
+          // In a real implementation, you would use fetch or XMLHttpRequest
+          // to send the data to your email handling script
+          /*
+                fetch('https://your-server.com/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formObject)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    statusMessage.textContent = data.message;
+                    statusMessage.className = "status-message success";
+                    contactForm.reset();
+                })
+                .catch(error => {
+                    statusMessage.textContent = "There was an error sending your message. Please try again later.";
+                    statusMessage.className = "status-message error";
+                });
+                */
+
+          // For now, we'll just log the form data and reset the form
+          console.log("Form data:", formObject);
+          contactForm.reset();
+
+          // In a real implementation, you would want to actually send this data
+          // to jacmwaniki@gmail.com using a server-side script or email service
+        });
+      });
+
+      function formatDate(date) {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        return date.toLocaleDateString("en-US", options);
+      }
+    </script>
+  </body>
+</html>
