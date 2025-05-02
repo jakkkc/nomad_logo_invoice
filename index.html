@@ -251,6 +251,25 @@
         bottom: 100px;
         left: 60px;
       }
+
+      /* Loading spinner */
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body>
@@ -272,7 +291,7 @@
             <p>Email: jacmwaniki@gmail.com</p>
           </div>
           <div class="invoice-info">
-            <p><strong>Invoice #:</strong> SH-2023-001</p>
+            <p><strong>Invoice #:</strong> SH-2025-001</p>
             <p><strong>Date:</strong> <span id="current-date"></span></p>
             <p><strong>Due Date:</strong> <span id="due-date"></span></p>
           </div>
@@ -345,7 +364,9 @@
               value="New message from Softhub Invoice"
             />
             <input type="hidden" name="_replyto" value="jacmwaniki@gmail.com" />
-            <button type="submit">Send Message</button>
+            <button type="submit" id="submitBtn">
+              <span id="btnText">Send Message</span>
+            </button>
           </form>
           <div id="statusMessage" class="status-message"></div>
         </div>
@@ -372,39 +393,49 @@
 
         // Form submission handling
         const contactForm = document.getElementById("invoiceContactForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const btnText = document.getElementById("btnText");
         const statusMessage = document.getElementById("statusMessage");
 
-        contactForm.addEventListener("submit", function (e) {
+        contactForm.addEventListener("submit", async function (e) {
           e.preventDefault();
+
+          // Show loading state
+          submitBtn.disabled = true;
+          btnText.textContent = "Sending...";
 
           // Show sending message
           statusMessage.textContent = "Sending your message...";
           statusMessage.className = "status-message";
           statusMessage.style.display = "block";
 
-          // Submit the form using Formspree
-          fetch(contactForm.action, {
-            method: "POST",
-            body: new FormData(contactForm),
-            headers: {
-              Accept: "application/json",
-            },
-          })
-            .then((response) => {
-              if (response.ok) {
-                statusMessage.textContent =
-                  "Thank you for your message! We'll get back to you soon.";
-                statusMessage.className = "status-message success";
-                contactForm.reset();
-              } else {
-                throw new Error("Network response was not ok");
-              }
-            })
-            .catch((error) => {
-              statusMessage.textContent =
-                "There was an error sending your message. Please try again later.";
-              statusMessage.className = "status-message error";
+          try {
+            // Submit the form using Formspree
+            const response = await fetch(contactForm.action, {
+              method: "POST",
+              body: new FormData(contactForm),
+              headers: {
+                Accept: "application/json",
+              },
             });
+
+            if (response.ok) {
+              statusMessage.textContent =
+                "Thank you for your message! We'll get back to you soon.";
+              statusMessage.className = "status-message success";
+              contactForm.reset();
+            } else {
+              throw new Error("Failed to send message");
+            }
+          } catch (error) {
+            statusMessage.textContent =
+              "There was an error sending your message. Please try again later.";
+            statusMessage.className = "status-message error";
+          } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            btnText.textContent = "Send Message";
+          }
         });
       });
 
