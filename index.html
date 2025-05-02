@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Softhub - Invoice</title>
+    <title>Softhub - Professional Invoice</title>
     <style>
       :root {
         --primary-pink: #ea2790;
@@ -12,12 +12,16 @@
         --primary-orange: #f5a635;
         --primary-white: #ffffff;
         --light-bg: #f8fafc;
+        --sport-accent: #f5a635;
       }
 
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+
       body {
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont,
+          sans-serif;
         line-height: 1.6;
-        color: #334155;
+        color: #1a1a1a;
         max-width: 800px;
         margin: 0 auto;
         padding: 2rem;
@@ -27,45 +31,58 @@
       .invoice-container {
         background-color: white;
         border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
         overflow: hidden;
         position: relative;
         z-index: 1;
+        border: 1px solid rgba(0, 0, 0, 0.05);
       }
 
       .invoice-header {
-        padding: 3rem;
-        background: linear-gradient(
-          135deg,
-          var(--primary-blue),
-          var(--primary-green)
-        );
-        color: white;
+        padding: 2.5rem;
+        background-color: white;
+        color: #1a1a1a;
         position: relative;
         overflow: hidden;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       }
 
       .logo-container {
-        /* background-color: rgba(255, 255, 255, 0.95); */
-        padding: 1.5rem;
-        border-radius: 12px;
-        display: inline-flex;
-        margin-bottom: 2rem;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-        backdrop-filter: blur(4px);
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.5rem;
       }
 
       .company-logo {
-        max-width: 200px;
-        height: auto;
-        display: block;
+        height: 48px;
+        width: auto;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
       }
 
       h1 {
-        margin: 1.5rem 0 0;
-        font-size: 2.25rem;
-        font-weight: 800;
-        letter-spacing: -0.75px;
+        margin: 0.5rem 0 0;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        text-align: center;
+        color: #1a1a1a;
+      }
+
+      .header-graphics {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .graphic-circle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.15;
+        filter: blur(20px);
       }
 
       .invoice-details {
@@ -73,29 +90,38 @@
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
         margin-top: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .invoice-info {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(5px);
+        padding: 1rem;
+        border-radius: 8px;
       }
 
       .invoice-info p {
         margin: 0.5rem 0;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
 
       .invoice-body {
-        padding: 3rem;
+        padding: 2.5rem;
       }
 
       .client-info {
         background-color: var(--light-bg);
-        padding: 2rem;
+        padding: 1.5rem;
         border-radius: 12px;
-        margin-bottom: 2.5rem;
-        border-left: 4px solid var(--primary-blue);
+        margin-bottom: 2rem;
+        border-left: 4px solid var(--sport-accent);
       }
 
       table {
         width: 100%;
         border-collapse: collapse;
-        margin: 2.5rem 0;
+        margin: 2rem 0;
       }
 
       th,
@@ -110,7 +136,7 @@
         color: #64748b;
         font-weight: 600;
         text-transform: uppercase;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         letter-spacing: 0.5px;
       }
 
@@ -120,163 +146,74 @@
       }
 
       .total-amount {
-        font-size: 1.3rem;
-        color: var(--primary-blue);
+        font-size: 1.25rem;
+        color: var(--sport-accent);
+        font-weight: 700;
       }
 
-      .color-palette {
+      .contact-info {
+        background-color: var(--light-bg);
+        padding: 2rem;
+        border-radius: 12px;
+        margin-top: 2.5rem;
+        text-align: center;
+        border-top: 4px solid var(--sport-accent);
+      }
+
+      .contact-info h3 {
+        margin-top: 0;
+        color: var(--sport-accent);
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-details {
         display: flex;
         justify-content: center;
-        margin: 3rem 0;
-        gap: 1.5rem;
+        gap: 2rem;
+        flex-wrap: wrap;
       }
 
-      .color-chip {
-        width: 56px;
-        height: 56px;
-        border-radius: 12px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-        position: relative;
-        overflow: hidden;
-        transition: transform 0.3s ease;
-      }
-
-      .color-chip:hover {
-        transform: translateY(-5px);
-      }
-
-      .contact-form {
-        background-color: #f8fafc;
-        padding: 2.5rem;
-        border-radius: 16px;
-        margin-top: 2.5rem;
-        border: 1px solid #e2e8f0;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .contact-form h2 {
-        margin-top: 0;
-        color: var(--primary-blue);
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
-        position: relative;
-        z-index: 1;
-      }
-
-      .form-group {
-        margin-bottom: 1.75rem;
-        position: relative;
-        z-index: 1;
-      }
-
-      label {
-        display: block;
-        margin-bottom: 0.75rem;
-        font-weight: 500;
-        color: #475569;
-        font-size: 0.95rem;
-      }
-
-      input,
-      textarea {
-        width: 100%;
-        padding: 1rem;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        font-family: inherit;
-        font-size: 1rem;
-        transition: all 0.3s;
-      }
-
-      input:focus,
-      textarea:focus {
-        outline: none;
-        border-color: var(--primary-blue);
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-      }
-
-      textarea {
-        height: 140px;
-        resize: vertical;
-      }
-
-      button {
-        background-color: var(--primary-pink);
-        color: white;
-        border: none;
-        padding: 1rem 2.5rem;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 1rem;
-        font-weight: 600;
-        transition: all 0.3s;
-        display: inline-flex;
+      .contact-item {
+        display: flex;
         align-items: center;
-        gap: 0.75rem;
-        box-shadow: 0 4px 12px rgba(234, 39, 144, 0.25);
-        position: relative;
-        z-index: 1;
+        gap: 0.5rem;
       }
 
-      button:hover {
-        background-color: #d41e7e;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(234, 39, 144, 0.3);
-      }
-
-      .spinner {
-        display: inline-block;
-        width: 18px;
-        height: 18px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: white;
-        animation: spin 1s ease-in-out infinite;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .alert {
-        padding: 1.25rem;
-        border-radius: 8px;
-        margin: 1.5rem 0;
-        font-size: 0.95rem;
-        position: relative;
-        z-index: 1;
-      }
-
-      .alert-success {
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-      }
-
-      .alert-error {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
+      .contact-icon {
+        width: 20px;
+        height: 20px;
+        opacity: 0.8;
       }
 
       .invoice-footer {
         text-align: center;
-        padding: 2rem;
+        padding: 1.5rem;
         color: #64748b;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         border-top: 1px solid #e2e8f0;
       }
 
-      /* Dynamic decorative circles */
+      /* Sporty accent elements */
+      .accent-line {
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-pink),
+          var(--primary-orange)
+        );
+        margin: 1.5rem 0;
+        border-radius: 2px;
+      }
+
+      /* Dynamic floating circles */
       .floating-circle {
         position: absolute;
         border-radius: 50%;
         opacity: 0.08;
         z-index: 0;
         animation: float 15s infinite ease-in-out;
+        filter: blur(15px);
       }
 
       @keyframes float {
@@ -288,93 +225,58 @@
           transform: translateY(-20px) rotate(5deg);
         }
       }
-
-      /* Direct email fallback */
-      .email-fallback {
-        margin-top: 2rem;
-        font-size: 0.95rem;
-        color: #64748b;
-        position: relative;
-        z-index: 1;
-      }
-
-      .email-link {
-        color: var(--primary-pink);
-        font-weight: 500;
-        text-decoration: none;
-        transition: color 0.2s;
-        display: inline-block;
-        margin-top: 0.5rem;
-      }
-
-      .email-link:hover {
-        color: #d41e7e;
-      }
     </style>
   </head>
   <body>
     <div class="invoice-container">
-      <!-- Dynamic floating circles -->
-      <div
-        class="floating-circle"
-        style="
-          width: 120px;
-          height: 120px;
-          background-color: var(--primary-pink);
-          top: 50px;
-          left: -30px;
-          animation-delay: 0s;
-        "
-      ></div>
-      <div
-        class="floating-circle"
-        style="
-          width: 80px;
-          height: 80px;
-          background-color: var(--primary-orange);
-          top: 150px;
-          right: -20px;
-          animation-delay: 2s;
-        "
-      ></div>
-      <div
-        class="floating-circle"
-        style="
-          width: 160px;
-          height: 160px;
-          background-color: var(--primary-green);
-          bottom: 80px;
-          left: -40px;
-          animation-delay: 4s;
-        "
-      ></div>
-      <div
-        class="floating-circle"
-        style="
-          width: 100px;
-          height: 100px;
-          background-color: var(--primary-blue);
-          bottom: 30px;
-          right: -30px;
-          animation-delay: 6s;
-        "
-      ></div>
-
+      <!-- Header with floating color circles -->
       <div class="invoice-header">
-        <!-- Logo with light background container -->
+        <div class="header-graphics">
+          <div
+            class="graphic-circle"
+            style="
+              width: 200px;
+              height: 200px;
+              background-color: var(--primary-pink);
+              top: -50px;
+              left: -50px;
+            "
+          ></div>
+          <div
+            class="graphic-circle"
+            style="
+              width: 150px;
+              height: 150px;
+              background-color: var(--primary-blue);
+              bottom: -30px;
+              right: 20px;
+            "
+          ></div>
+          <div
+            class="graphic-circle"
+            style="
+              width: 180px;
+              height: 180px;
+              background-color: var(--primary-green);
+              top: 30%;
+              right: -60px;
+            "
+          ></div>
+        </div>
+
         <div class="logo-container">
           <img src="img/lgo.png" alt="Softhub Logo" class="company-logo" />
         </div>
 
-        <h1>Invoice</h1>
+        <h1>INVOICE</h1>
+
         <div class="invoice-details">
           <div class="invoice-info">
             <p><strong>Softhub</strong></p>
             <p>Kenya</p>
-            <p>Email: jacmwaniki@gmail.com</p>
           </div>
           <div class="invoice-info">
-            <p><strong>Invoice #:</strong> SH-2023-001</p>
+            <p><strong>Invoice #:</strong> SH-2025-001</p>
             <p><strong>Date:</strong> <span id="current-date"></span></p>
             <p><strong>Due Date:</strong> <span id="due-date"></span></p>
           </div>
@@ -387,6 +289,8 @@
           <p>The Nomads Palace</p>
           <p>Logo Design Service</p>
         </div>
+
+        <div class="accent-line"></div>
 
         <table>
           <thead>
@@ -411,95 +315,40 @@
           </tbody>
         </table>
 
-        <div class="color-palette">
-          <div
-            class="color-chip"
-            style="background-color: var(--primary-pink)"
-          ></div>
-          <div
-            class="color-chip"
-            style="background-color: var(--primary-blue)"
-          ></div>
-          <div
-            class="color-chip"
-            style="background-color: var(--primary-green)"
-          ></div>
-          <div
-            class="color-chip"
-            style="background-color: var(--primary-orange)"
-          ></div>
-          <div
-            class="color-chip"
-            style="
-              background-color: var(--primary-white);
-              border: 1px solid #e2e8f0;
-            "
-          ></div>
-        </div>
-
-        <div class="contact-form">
-          <!-- Additional floating circles just for the form area -->
-          <div
-            class="floating-circle"
-            style="
-              width: 180px;
-              height: 180px;
-              background-color: var(--primary-blue);
-              top: -60px;
-              right: -60px;
-              opacity: 0.05;
-            "
-          ></div>
-          <div
-            class="floating-circle"
-            style="
-              width: 100px;
-              height: 100px;
-              background-color: var(--primary-green);
-              bottom: -30px;
-              left: -30px;
-              opacity: 0.05;
-            "
-          ></div>
-
-          <h2>Contact Us</h2>
-          <form
-            id="invoiceContactForm"
-            action="https://formspree.io/f/jacmwaniki@gmail.com"
-            method="POST"
-          >
-            <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" required />
+        <div class="contact-info">
+          <h3>CONTACT US</h3>
+          <div class="contact-details">
+            <div class="contact-item">
+              <svg
+                class="contact-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>+254 742 881 370</span>
             </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" required />
+            <div class="contact-item">
+              <svg
+                class="contact-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>jacmwaniki@gmail.com</span>
             </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" required></textarea>
-            </div>
-            <input
-              type="hidden"
-              name="_subject"
-              value="New message from Softhub Invoice"
-            />
-            <input type="hidden" name="_replyto" value="jacmwaniki@gmail.com" />
-            <button type="submit" id="submitBtn">
-              <span id="btnText">Send Message</span>
-            </button>
-          </form>
-          <div id="statusMessage"></div>
-
-          <div class="email-fallback">
-            <p>Prefer to email directly?</p>
-            <a
-              href="mailto:jacmwaniki@gmail.com?subject=Softhub%20Invoice%20Inquiry"
-              class="email-link"
-            >
-              jacmwaniki@gmail.com
-            </a>
           </div>
         </div>
       </div>
@@ -512,6 +361,41 @@
       </div>
     </div>
 
+    <!-- Floating background circles -->
+    <div
+      class="floating-circle"
+      style="
+        width: 300px;
+        height: 300px;
+        background-color: var(--primary-pink);
+        top: 100px;
+        left: -100px;
+        animation-delay: 0s;
+      "
+    ></div>
+    <div
+      class="floating-circle"
+      style="
+        width: 200px;
+        height: 200px;
+        background-color: var(--primary-blue);
+        top: 300px;
+        right: -50px;
+        animation-delay: 2s;
+      "
+    ></div>
+    <div
+      class="floating-circle"
+      style="
+        width: 250px;
+        height: 250px;
+        background-color: var(--primary-green);
+        bottom: 100px;
+        left: -50px;
+        animation-delay: 4s;
+      "
+    ></div>
+
     <script>
       // Set current date and due date (14 days from now)
       document.addEventListener("DOMContentLoaded", function () {
@@ -522,77 +406,10 @@
         document.getElementById("current-date").textContent = formatDate(now);
         document.getElementById("due-date").textContent = formatDate(dueDate);
         document.getElementById("current-year").textContent = now.getFullYear();
-
-        // Form submission handling
-        const contactForm = document.getElementById("invoiceContactForm");
-        const submitBtn = document.getElementById("submitBtn");
-        const btnText = document.getElementById("btnText");
-        const statusMessage = document.getElementById("statusMessage");
-
-        contactForm.addEventListener("submit", async function (e) {
-          e.preventDefault();
-
-          // Show loading state
-          submitBtn.disabled = true;
-          btnText.textContent = "Sending";
-          submitBtn.insertAdjacentHTML(
-            "beforeend",
-            '<span class="spinner"></span>'
-          );
-
-          // Clear previous messages
-          statusMessage.innerHTML = "";
-
-          try {
-            // Submit the form using Formspree
-            const response = await fetch(contactForm.action, {
-              method: "POST",
-              body: new FormData(contactForm),
-              headers: {
-                Accept: "application/json",
-              },
-            });
-
-            if (response.ok) {
-              showAlert(
-                "Message sent successfully! We will respond soon.",
-                "success"
-              );
-              contactForm.reset();
-            } else {
-              throw new Error("Failed to send message");
-            }
-          } catch (error) {
-            showAlert(
-              "Failed to send message. Please try again later or email us directly.",
-              "error"
-            );
-            console.error("Form submission error:", error);
-          } finally {
-            // Reset button state
-            submitBtn.disabled = false;
-            btnText.textContent = "Send Message";
-            const spinner = submitBtn.querySelector(".spinner");
-            if (spinner) spinner.remove();
-          }
-        });
-
-        function showAlert(message, type) {
-          const alertDiv = document.createElement("div");
-          alertDiv.className = `alert alert-${type}`;
-          alertDiv.textContent = message;
-          statusMessage.appendChild(alertDiv);
-
-          // Remove alert after 5 seconds
-          setTimeout(() => {
-            alertDiv.style.opacity = "0";
-            setTimeout(() => alertDiv.remove(), 300);
-          }, 5000);
-        }
       });
 
       function formatDate(date) {
-        const options = { year: "numeric", month: "long", day: "numeric" };
+        const options = { year: "numeric", month: "short", day: "numeric" };
         return date.toLocaleDateString("en-US", options);
       }
     </script>
