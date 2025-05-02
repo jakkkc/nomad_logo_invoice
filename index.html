@@ -262,17 +262,20 @@
 
       <div class="invoice-header">
         <!-- Your company logo -->
-        <img src="img/lgo.png" alt="Softhub Logo" class="company-logo" />
+        <img
+          src="https://via.placeholder.com/150x80?text=Softhub+Logo"
+          alt="Softhub Logo"
+          class="company-logo"
+        />
 
         <h1>Invoice</h1>
         <div class="invoice-details">
           <div class="invoice-info">
             <p><strong>Softhub</strong></p>
-            <p>Kenya</p>
-            <p>Email:</p>
+            <p>Nairobi, Kenya</p>
+            <p>Email: info@softhub.co.ke</p>
           </div>
           <div class="invoice-info">
-            jacmwaniki@gmail.com
             <p><strong>Invoice #:</strong> SH-2023-001</p>
             <p><strong>Date:</strong> <span id="current-date"></span></p>
             <p><strong>Due Date:</strong> <span id="due-date"></span></p>
@@ -323,7 +326,11 @@
 
         <div class="contact-form">
           <h2>Contact Us</h2>
-          <form id="invoiceContactForm">
+          <form
+            id="invoiceContactForm"
+            action="https://formspree.io/f/jacmwaniki@gmail.com"
+            method="POST"
+          >
             <div class="form-group">
               <label for="name">Your Name</label>
               <input type="text" id="name" name="name" required />
@@ -336,6 +343,12 @@
               <label for="message">Message</label>
               <textarea id="message" name="message" required></textarea>
             </div>
+            <input
+              type="hidden"
+              name="_subject"
+              value="New message from Softhub Invoice"
+            />
+            <input type="hidden" name="_replyto" value="jacmwaniki@gmail.com" />
             <button type="submit">Send Message</button>
           </form>
           <div id="statusMessage" class="status-message"></div>
@@ -361,53 +374,41 @@
         document.getElementById("due-date").textContent = formatDate(dueDate);
         document.getElementById("current-year").textContent = now.getFullYear();
 
-        // Form submission
+        // Form submission handling
         const contactForm = document.getElementById("invoiceContactForm");
         const statusMessage = document.getElementById("statusMessage");
 
         contactForm.addEventListener("submit", function (e) {
           e.preventDefault();
 
-          const formData = new FormData(contactForm);
-          const formObject = {};
-          formData.forEach((value, key) => {
-            formObject[key] = value;
-          });
+          // Show sending message
+          statusMessage.textContent = "Sending your message...";
+          statusMessage.className = "status-message";
+          statusMessage.style.display = "block";
 
-          // Here you would typically send the data to a server
-          // For this example, we'll simulate a successful submission
-          statusMessage.textContent =
-            "Thank you for your message! We'll get back to you soon.";
-          statusMessage.className = "status-message success";
-
-          // In a real implementation, you would use fetch or XMLHttpRequest
-          // to send the data to your email handling script
-          /*
-                fetch('https://your-server.com/send-email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formObject)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    statusMessage.textContent = data.message;
-                    statusMessage.className = "status-message success";
-                    contactForm.reset();
-                })
-                .catch(error => {
-                    statusMessage.textContent = "There was an error sending your message. Please try again later.";
-                    statusMessage.className = "status-message error";
-                });
-                */
-
-          // For now, we'll just log the form data and reset the form
-          console.log("Form data:", formObject);
-          contactForm.reset();
-
-          // In a real implementation, you would want to actually send this data
-          // to jacmwaniki@gmail.com using a server-side script or email service
+          // Submit the form using Formspree
+          fetch(contactForm.action, {
+            method: "POST",
+            body: new FormData(contactForm),
+            headers: {
+              Accept: "application/json",
+            },
+          })
+            .then((response) => {
+              if (response.ok) {
+                statusMessage.textContent =
+                  "Thank you for your message! We'll get back to you soon.";
+                statusMessage.className = "status-message success";
+                contactForm.reset();
+              } else {
+                throw new Error("Network response was not ok");
+              }
+            })
+            .catch((error) => {
+              statusMessage.textContent =
+                "There was an error sending your message. Please try again later.";
+              statusMessage.className = "status-message error";
+            });
         });
       });
 
