@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Softhub - Invoice for The Nomads Palace Logo</title>
+    <title>Softhub - Invoice</title>
     <style>
       :root {
         --primary-pink: #ea2790;
@@ -11,28 +11,30 @@
         --primary-green: #29c167;
         --primary-orange: #f5a635;
         --primary-white: #ffffff;
+        --light-bg: #f8fafc;
       }
 
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
         line-height: 1.6;
-        color: #333;
+        color: #334155;
         max-width: 800px;
         margin: 0 auto;
-        padding: 20px;
-        background-color: #f9f9f9;
+        padding: 2rem;
+        background-color: var(--light-bg);
       }
 
       .invoice-container {
         background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
         overflow: hidden;
         position: relative;
+        z-index: 1;
       }
 
       .invoice-header {
-        padding: 30px;
+        padding: 3rem;
         background: linear-gradient(
           135deg,
           var(--primary-blue),
@@ -43,139 +45,159 @@
         overflow: hidden;
       }
 
-      .invoice-header::before {
-        content: "";
-        position: absolute;
-        top: -50px;
-        right: -50px;
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-
-      .invoice-header::after {
-        content: "";
-        position: absolute;
-        bottom: -80px;
-        left: -80px;
-        width: 250px;
-        height: 250px;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.1);
+      .logo-container {
+        /* background-color: rgba(255, 255, 255, 0.95); */
+        padding: 1.5rem;
+        border-radius: 12px;
+        display: inline-flex;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        backdrop-filter: blur(4px);
       }
 
       .company-logo {
-        max-width: 150px;
-        max-height: 80px;
-        width: auto;
+        max-width: 200px;
         height: auto;
-        margin-bottom: 20px;
         display: block;
       }
 
       h1 {
-        margin: 0;
-        font-size: 28px;
-        font-weight: 700;
+        margin: 1.5rem 0 0;
+        font-size: 2.25rem;
+        font-weight: 800;
+        letter-spacing: -0.75px;
       }
 
       .invoice-details {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-      }
-
-      .invoice-info {
-        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
       }
 
       .invoice-info p {
-        margin: 5px 0;
+        margin: 0.5rem 0;
+        font-size: 0.95rem;
       }
 
       .invoice-body {
-        padding: 30px;
+        padding: 3rem;
+      }
+
+      .client-info {
+        background-color: var(--light-bg);
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2.5rem;
+        border-left: 4px solid var(--primary-blue);
       }
 
       table {
         width: 100%;
         border-collapse: collapse;
-        margin: 20px 0;
+        margin: 2.5rem 0;
       }
 
       th,
       td {
-        padding: 12px 15px;
+        padding: 1.25rem;
         text-align: left;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #f1f5f9;
       }
 
       th {
-        background-color: #f5f5f5;
-        color: #555;
+        background-color: #f8fafc;
+        color: #64748b;
         font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
       }
 
       .total-row {
         font-weight: bold;
-        background-color: #f9f9f9;
+        background-color: #f8fafc;
       }
 
       .total-amount {
-        font-size: 20px;
+        font-size: 1.3rem;
         color: var(--primary-blue);
       }
 
-      .color-circles {
+      .color-palette {
         display: flex;
         justify-content: center;
-        margin: 30px 0;
+        margin: 3rem 0;
+        gap: 1.5rem;
       }
 
-      .color-circle {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin: 0 10px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      .color-chip {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      .color-chip:hover {
+        transform: translateY(-5px);
       }
 
       .contact-form {
-        background-color: #f9f9f9;
-        padding: 30px;
-        border-radius: 8px;
-        margin-top: 30px;
+        background-color: #f8fafc;
+        padding: 2.5rem;
+        border-radius: 16px;
+        margin-top: 2.5rem;
+        border: 1px solid #e2e8f0;
+        position: relative;
+        overflow: hidden;
       }
 
       .contact-form h2 {
         margin-top: 0;
         color: var(--primary-blue);
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 1;
       }
 
       .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 1.75rem;
+        position: relative;
+        z-index: 1;
       }
 
       label {
         display: block;
-        margin-bottom: 5px;
-        font-weight: 600;
-        color: #555;
+        margin-bottom: 0.75rem;
+        font-weight: 500;
+        color: #475569;
+        font-size: 0.95rem;
       }
 
       input,
       textarea {
         width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
+        padding: 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
         font-family: inherit;
-        font-size: 16px;
+        font-size: 1rem;
+        transition: all 0.3s;
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
       }
 
       textarea {
-        height: 120px;
+        height: 140px;
         resize: vertical;
       }
 
@@ -183,86 +205,34 @@
         background-color: var(--primary-pink);
         color: white;
         border: none;
-        padding: 12px 25px;
-        border-radius: 4px;
+        padding: 1rem 2.5rem;
+        border-radius: 8px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: 600;
-        transition: background-color 0.3s;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        box-shadow: 0 4px 12px rgba(234, 39, 144, 0.25);
+        position: relative;
+        z-index: 1;
       }
 
       button:hover {
         background-color: #d41e7e;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(234, 39, 144, 0.3);
       }
 
-      .status-message {
-        margin-top: 20px;
-        padding: 10px;
-        border-radius: 4px;
-        display: none;
-      }
-
-      .success {
-        background-color: #d4edda;
-        color: #155724;
-        display: block;
-      }
-
-      .error {
-        background-color: #f8d7da;
-        color: #721c24;
-        display: block;
-      }
-
-      .invoice-footer {
-        text-align: center;
-        padding: 20px;
-        color: #777;
-        font-size: 14px;
-        border-top: 1px solid #eee;
-      }
-
-      .decoration-circle {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.1;
-      }
-
-      .circle-1 {
-        width: 100px;
-        height: 100px;
-        background-color: var(--primary-pink);
-        top: 50px;
-        right: 100px;
-      }
-
-      .circle-2 {
-        width: 150px;
-        height: 150px;
-        background-color: var(--primary-orange);
-        bottom: 30px;
-        right: 40px;
-      }
-
-      .circle-3 {
-        width: 80px;
-        height: 80px;
-        background-color: var(--primary-green);
-        bottom: 100px;
-        left: 60px;
-      }
-
-      /* Loading spinner */
       .spinner {
         display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
         border-radius: 50%;
         border-top-color: white;
         animation: spin 1s ease-in-out infinite;
-        margin-right: 10px;
-        vertical-align: middle;
       }
 
       @keyframes spin {
@@ -270,18 +240,131 @@
           transform: rotate(360deg);
         }
       }
+
+      .alert {
+        padding: 1.25rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .invoice-footer {
+        text-align: center;
+        padding: 2rem;
+        color: #64748b;
+        font-size: 0.9rem;
+        border-top: 1px solid #e2e8f0;
+      }
+
+      /* Dynamic decorative circles */
+      .floating-circle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.08;
+        z-index: 0;
+        animation: float 15s infinite ease-in-out;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+      }
+
+      /* Direct email fallback */
+      .email-fallback {
+        margin-top: 2rem;
+        font-size: 0.95rem;
+        color: #64748b;
+        position: relative;
+        z-index: 1;
+      }
+
+      .email-link {
+        color: var(--primary-pink);
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s;
+        display: inline-block;
+        margin-top: 0.5rem;
+      }
+
+      .email-link:hover {
+        color: #d41e7e;
+      }
     </style>
   </head>
   <body>
     <div class="invoice-container">
-      <!-- Decorative circles -->
-      <div class="decoration-circle circle-1"></div>
-      <div class="decoration-circle circle-2"></div>
-      <div class="decoration-circle circle-3"></div>
+      <!-- Dynamic floating circles -->
+      <div
+        class="floating-circle"
+        style="
+          width: 120px;
+          height: 120px;
+          background-color: var(--primary-pink);
+          top: 50px;
+          left: -30px;
+          animation-delay: 0s;
+        "
+      ></div>
+      <div
+        class="floating-circle"
+        style="
+          width: 80px;
+          height: 80px;
+          background-color: var(--primary-orange);
+          top: 150px;
+          right: -20px;
+          animation-delay: 2s;
+        "
+      ></div>
+      <div
+        class="floating-circle"
+        style="
+          width: 160px;
+          height: 160px;
+          background-color: var(--primary-green);
+          bottom: 80px;
+          left: -40px;
+          animation-delay: 4s;
+        "
+      ></div>
+      <div
+        class="floating-circle"
+        style="
+          width: 100px;
+          height: 100px;
+          background-color: var(--primary-blue);
+          bottom: 30px;
+          right: -30px;
+          animation-delay: 6s;
+        "
+      ></div>
 
       <div class="invoice-header">
-        <!-- Your company logo -->
-        <img src="img/lgo.png" alt="Softhub Logo" class="company-logo" />
+        <!-- Logo with light background container -->
+        <div class="logo-container">
+          <img src="img/lgo.png" alt="Softhub Logo" class="company-logo" />
+        </div>
 
         <h1>Invoice</h1>
         <div class="invoice-details">
@@ -291,7 +374,7 @@
             <p>Email: jacmwaniki@gmail.com</p>
           </div>
           <div class="invoice-info">
-            <p><strong>Invoice #:</strong> SH-2025-001</p>
+            <p><strong>Invoice #:</strong> SH-2023-001</p>
             <p><strong>Date:</strong> <span id="current-date"></span></p>
             <p><strong>Due Date:</strong> <span id="due-date"></span></p>
           </div>
@@ -299,7 +382,7 @@
       </div>
 
       <div class="invoice-body">
-        <div class="invoice-info">
+        <div class="client-info">
           <p><strong>Bill To:</strong></p>
           <p>The Nomads Palace</p>
           <p>Logo Design Service</p>
@@ -328,18 +411,57 @@
           </tbody>
         </table>
 
-        <div class="color-circles">
-          <div class="color-circle" style="background-color: #ea2790"></div>
-          <div class="color-circle" style="background-color: #3953a2"></div>
-          <div class="color-circle" style="background-color: #29c167"></div>
-          <div class="color-circle" style="background-color: #f5a635"></div>
+        <div class="color-palette">
           <div
-            class="color-circle"
-            style="background-color: #ffffff; border: 1px solid #ddd"
+            class="color-chip"
+            style="background-color: var(--primary-pink)"
+          ></div>
+          <div
+            class="color-chip"
+            style="background-color: var(--primary-blue)"
+          ></div>
+          <div
+            class="color-chip"
+            style="background-color: var(--primary-green)"
+          ></div>
+          <div
+            class="color-chip"
+            style="background-color: var(--primary-orange)"
+          ></div>
+          <div
+            class="color-chip"
+            style="
+              background-color: var(--primary-white);
+              border: 1px solid #e2e8f0;
+            "
           ></div>
         </div>
 
         <div class="contact-form">
+          <!-- Additional floating circles just for the form area -->
+          <div
+            class="floating-circle"
+            style="
+              width: 180px;
+              height: 180px;
+              background-color: var(--primary-blue);
+              top: -60px;
+              right: -60px;
+              opacity: 0.05;
+            "
+          ></div>
+          <div
+            class="floating-circle"
+            style="
+              width: 100px;
+              height: 100px;
+              background-color: var(--primary-green);
+              bottom: -30px;
+              left: -30px;
+              opacity: 0.05;
+            "
+          ></div>
+
           <h2>Contact Us</h2>
           <form
             id="invoiceContactForm"
@@ -368,7 +490,17 @@
               <span id="btnText">Send Message</span>
             </button>
           </form>
-          <div id="statusMessage" class="status-message"></div>
+          <div id="statusMessage"></div>
+
+          <div class="email-fallback">
+            <p>Prefer to email directly?</p>
+            <a
+              href="mailto:jacmwaniki@gmail.com?subject=Softhub%20Invoice%20Inquiry"
+              class="email-link"
+            >
+              jacmwaniki@gmail.com
+            </a>
+          </div>
         </div>
       </div>
 
@@ -402,12 +534,14 @@
 
           // Show loading state
           submitBtn.disabled = true;
-          btnText.textContent = "Sending...";
+          btnText.textContent = "Sending";
+          submitBtn.insertAdjacentHTML(
+            "beforeend",
+            '<span class="spinner"></span>'
+          );
 
-          // Show sending message
-          statusMessage.textContent = "Sending your message...";
-          statusMessage.className = "status-message";
-          statusMessage.style.display = "block";
+          // Clear previous messages
+          statusMessage.innerHTML = "";
 
           try {
             // Submit the form using Formspree
@@ -420,23 +554,41 @@
             });
 
             if (response.ok) {
-              statusMessage.textContent =
-                "Thank you for your message! We'll get back to you soon.";
-              statusMessage.className = "status-message success";
+              showAlert(
+                "Message sent successfully! We will respond soon.",
+                "success"
+              );
               contactForm.reset();
             } else {
               throw new Error("Failed to send message");
             }
           } catch (error) {
-            statusMessage.textContent =
-              "There was an error sending your message. Please try again later.";
-            statusMessage.className = "status-message error";
+            showAlert(
+              "Failed to send message. Please try again later or email us directly.",
+              "error"
+            );
+            console.error("Form submission error:", error);
           } finally {
             // Reset button state
             submitBtn.disabled = false;
             btnText.textContent = "Send Message";
+            const spinner = submitBtn.querySelector(".spinner");
+            if (spinner) spinner.remove();
           }
         });
+
+        function showAlert(message, type) {
+          const alertDiv = document.createElement("div");
+          alertDiv.className = `alert alert-${type}`;
+          alertDiv.textContent = message;
+          statusMessage.appendChild(alertDiv);
+
+          // Remove alert after 5 seconds
+          setTimeout(() => {
+            alertDiv.style.opacity = "0";
+            setTimeout(() => alertDiv.remove(), 300);
+          }, 5000);
+        }
       });
 
       function formatDate(date) {
